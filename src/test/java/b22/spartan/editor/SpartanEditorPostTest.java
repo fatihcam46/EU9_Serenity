@@ -23,15 +23,16 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static net.serenitybdd.rest.SerenityRest.given;
 
-@Disabled
+//@Disabled
 @SerenityTest
-public class SpartanEditorPostTest extends SpartanNewBase {
+public class SpartanEditorPostTest extends SpartanNewBase {    //SpartanNewBase from utilities
 
         @DisplayName("Editor should be able to POST")
         @Test
         public void postSpartanAsEditor(){
 
-            //when you need deserialize or serialize, you dont need to add separate dependency, it comes
+            //when you need deserialize or serialize,
+            // you don't need to add separate dependency, it comes
             //with serenity
             //create one spartan using util
             Map<String,Object> bodyMap = SpartanUtil.getRandomSpartanMap();
@@ -48,7 +49,7 @@ public class SpartanEditorPostTest extends SpartanNewBase {
             .when()
                     .post("/spartans")
                     .then().log().all();
-
+//-----------------------------------------------------------------------
              /*
                 status code is 201
                 content type is Json
@@ -66,11 +67,11 @@ public class SpartanEditorPostTest extends SpartanNewBase {
             Ensure.that("Content type is JSON", vR -> vR.contentType(ContentType.JSON));
             //success message is A Spartan is Born!
             Ensure.that("success message is correct",
-                    thenPart -> thenPart.body("success",is("A Spartan is Born!"))
+                    thenPart -> thenPart.body("success",is("A Spartan is Born!"))//hamcrest matchers
             );
             //id is not null
             Ensure.that("id is not null",
-                    thenPart -> thenPart.body("data.id",notNullValue())
+                    thenPart -> thenPart.body("data.id",notNullValue())//path of id
             );
             //name is correct
             Ensure.that("name is correct",
@@ -122,7 +123,7 @@ public class SpartanEditorPostTest extends SpartanNewBase {
                     .contentType(ContentType.JSON)
                     .body(bodyMap)
                     .log().body()
-                    .when()
+            .when()
                     .post("/spartans")
                     .then().log().all();
 

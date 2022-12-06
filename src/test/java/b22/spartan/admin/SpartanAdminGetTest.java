@@ -1,5 +1,5 @@
 package b22.spartan.admin;
-
+//day13
 import io.restassured.http.ContentType;
 import net.serenitybdd.junit5.SerenityTest;
 import net.serenitybdd.rest.Ensure;
@@ -16,13 +16,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static net.serenitybdd.rest.SerenityRest.given;
 @Disabled
-@SerenityTest
+@SerenityTest  //above to our class,
 public class SpartanAdminGetTest {
 
     @BeforeAll
     public static void init(){
-        //save baseurl inside this variable so that we dont need to type each http method.
-        baseURI = "http://44.195.19.167:7000";
+        //save baseurl inside this variable so that we don't need to type each http method.
+        baseURI = "http://3.87.65.105:7000";//my ip address
 
     }
 
@@ -44,7 +44,7 @@ public class SpartanAdminGetTest {
     @Test
     public void getOneSpartan(){
 
-            given()
+        SerenityRest.given()  //SerenityRest.given()
                 .accept(ContentType.JSON)
                 .and()
                 .auth().basic("admin","admin")
@@ -75,17 +75,19 @@ public class SpartanAdminGetTest {
                 .accept(ContentType.JSON)
                 .and()
                 .auth().basic("admin","admin")
-                .pathParam("id",15)
+                .pathParam("id",15)  //I added ID :15  here
                 .when()
                 .get("/api/spartans/{id}");
 
         //Serenity way of assertion
 
         Ensure.that("Status code is 200",validatableResponse -> validatableResponse.statusCode(201) );
+                                                   //variable name -> variable name
 
         Ensure.that("Content-type is JSON",vRes -> vRes.contentType(ContentType.JSON));
 
         Ensure.that("Id is 15", vRes -> vRes.body("id",is(15)));
+        //hamcrest matcher same
 
 
 
