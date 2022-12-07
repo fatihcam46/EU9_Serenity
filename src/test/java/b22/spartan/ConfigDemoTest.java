@@ -10,6 +10,8 @@ public class ConfigDemoTest {
     public void test1(){
         System.out.println(ConfigReader.getProperty("serenity.project.name"));
         System.out.println(ConfigReader.getProperty("spartan.editor.username"));
+        //B22 API Report  it is coming from serenity.properties
+        //editor
 
     }
 }

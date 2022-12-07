@@ -22,8 +22,7 @@ import static net.serenitybdd.rest.SerenityRest.lastResponse;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static net.serenitybdd.rest.SerenityRest.given;
-
-//@Disabled
+@Disabled
 @SerenityTest
 public class SpartanEditorPostTest extends SpartanNewBase {    //SpartanNewBase from utilities
 
@@ -101,15 +100,16 @@ public class SpartanEditorPostTest extends SpartanNewBase {    //SpartanNewBase 
             {0} , {1},{2} --> based on the order you provide as argument.
 
          */
-        @ParameterizedTest(name = "New Spartan {index} - name: {0}")
+        @ParameterizedTest(name = "New Spartan {index} - name: {0}")//{index} - name: {0} 1,2,3...
         @CsvFileSource(resources = "/SpartanData.csv",numLinesToSkip = 1)
+        //from resources SpartanData.csv taking all data
         public void postSpartanWithCSV(String name,String gender,long phone){
-
-            System.out.println("name = " + name);
+// we need to write 3 parameters: name,gender,phone
+            System.out.println("name = " + name); //Hersch,Male,9222087279 ....
             System.out.println("gender = " + gender);
             System.out.println("phone = " + phone);
 
-            Map<String,Object> bodyMap = new LinkedHashMap<>();
+            Map<String,Object> bodyMap = new LinkedHashMap<>();//
             bodyMap.put("name",name);
             bodyMap.put("gender",gender);
             bodyMap.put("phone",phone);

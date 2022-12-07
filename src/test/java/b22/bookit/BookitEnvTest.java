@@ -4,7 +4,7 @@ import net.serenitybdd.junit5.SerenityTest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import utilities.ConfigReader;
-@Disabled
+//@Disabled
 @SerenityTest
 public class BookitEnvTest {
 
