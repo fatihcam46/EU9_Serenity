@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite errors="0" failures="3" name="b22.spartan.editor.SpartanEditorPostTest" skipped="0" tests="11" time="24.61" timestamp="2022-12-07 06:06:36"><testcase classname="b22.spartan.editor.SpartanEditorPostTest" name="Editor should be able to POST"/><testcase classname="b22.spartan.editor.SpartanEditorPostTest" name="New Spartan 1 - name"/><testcase classname="b22.spartan.editor.SpartanEditorPostTest" name="New Spartan 2 - name"><failure message="1 expectation failed.&#10;JSON path data.phone doesn't match.&#10;Expected: is &lt;1207282206L&gt;&#10;  Actual: &lt;1207282206&gt;&#10;" type="java.lang.AssertionError">1 expectation failed.
+JSON path data.phone doesn't match.
+Expected: is &lt;1207282206L&gt;
+  Actual: &lt;1207282206&gt;
+</failure><system-err>1 expectation failed.
+JSON path data.phone doesn't match.
+Expected: is &lt;1207282206L&gt;
+  Actual: &lt;1207282206&gt;
+&#13;
+io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)&#13;
+io.restassured.internal.ResponseSpecificationImpl.body(ResponseSpecificationImpl.groovy:261)&#13;
+io.restassured.internal.ResponseSpecificationImpl.body(ResponseSpecificationImpl.groovy:108)&#13;
+io.restassured.internal.ValidatableResponseOptionsImpl.body(ValidatableResponseOptionsImpl.java:244)&#13;
+io.restassured.internal.ValidatableResponseImpl.super$2$body(ValidatableResponseImpl.groovy)&#13;
+groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)&#13;
+groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1268)&#13;
+io.restassured.internal.ValidatableResponseImpl.body(ValidatableResponseImpl.groovy:298)&#13;
+io.restassured.internal.ValidatableResponseImpl.body(ValidatableResponseImpl.groovy)&#13;
+b22.spartan.editor.SpartanEditorPostTest.lambda$postSpartanWithCSV$14(SpartanEditorPostTest.java:153)&#13;
+net.serenitybdd.rest.Ensure.performCheck(Ensure.java:35)&#13;
+net.serenitybdd.rest.Ensure.that(Ensure.java:23)&#13;
+b22.spartan.editor.SpartanEditorPostTest.postSpartanWithCSV(SpartanEditorPostTest.java:152)&#13;
+</system-err></testcase><testcase classname="b22.spartan.editor.SpartanEditorPostTest" name="New Spartan 3 - name"/><testcase classname="b22.spartan.editor.SpartanEditorPostTest" name="New Spartan 4 - name"/><testcase classname="b22.spartan.editor.SpartanEditorPostTest" name="New Spartan 5 - name"/><testcase classname="b22.spartan.editor.SpartanEditorPostTest" name="New Spartan 6 - name"/><testcase classname="b22.spartan.editor.SpartanEditorPostTest" name="New Spartan 7 - name"><failure message="1 expectation failed.&#10;JSON path data.phone doesn't match.&#10;Expected: is &lt;1791599082L&gt;&#10;  Actual: &lt;1791599082&gt;&#10;" type="java.lang.AssertionError">1 expectation failed.
+JSON path data.phone doesn't match.
+Expected: is &lt;1791599082L&gt;
+  Actual: &lt;1791599082&gt;
+</failure><system-err>1 expectation failed.
+JSON path data.phone doesn't match.
+Expected: is &lt;1791599082L&gt;
+  Actual: &lt;1791599082&gt;
+&#13;
+io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)&#13;
+io.restassured.internal.ResponseSpecificationImpl.body(ResponseSpecificationImpl.groovy:261)&#13;
+io.restassured.internal.ResponseSpecificationImpl.body(ResponseSpecificationImpl.groovy:108)&#13;
+io.restassured.internal.ValidatableResponseOptionsImpl.body(ValidatableResponseOptionsImpl.java:244)&#13;
+io.restassured.internal.ValidatableResponseImpl.super$2$body(ValidatableResponseImpl.groovy)&#13;
+groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)&#13;
+groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1268)&#13;
+io.restassured.internal.ValidatableResponseImpl.body(ValidatableResponseImpl.groovy:298)&#13;
+io.restassured.internal.ValidatableResponseImpl.body(ValidatableResponseImpl.groovy)&#13;
+b22.spartan.editor.SpartanEditorPostTest.lambda$postSpartanWithCSV$14(SpartanEditorPostTest.java:153)&#13;
+net.serenitybdd.rest.Ensure.performCheck(Ensure.java:35)&#13;
+net.serenitybdd.rest.Ensure.that(Ensure.java:23)&#13;
+b22.spartan.editor.SpartanEditorPostTest.postSpartanWithCSV(SpartanEditorPostTest.java:152)&#13;
+</system-err></testcase><testcase classname="b22.spartan.editor.SpartanEditorPostTest" name="New Spartan 8 - name"><failure message="1 expectation failed.&#10;JSON path data.phone doesn't match.&#10;Expected: is &lt;1936508511L&gt;&#10;  Actual: &lt;1936508511&gt;&#10;" type="java.lang.AssertionError">1 expectation failed.
+JSON path data.phone doesn't match.
+Expected: is &lt;1936508511L&gt;
+  Actual: &lt;1936508511&gt;
+</failure><system-err>1 expectation failed.
+JSON path data.phone doesn't match.
+Expected: is &lt;1936508511L&gt;
+  Actual: &lt;1936508511&gt;
+&#13;
+io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:674)&#13;
+io.restassured.internal.ResponseSpecificationImpl.body(ResponseSpecificationImpl.groovy:261)&#13;
+io.restassured.internal.ResponseSpecificationImpl.body(ResponseSpecificationImpl.groovy:108)&#13;
+io.restassured.internal.ValidatableResponseOptionsImpl.body(ValidatableResponseOptionsImpl.java:244)&#13;
+io.restassured.internal.ValidatableResponseImpl.super$2$body(ValidatableResponseImpl.groovy)&#13;
+groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)&#13;
+groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1268)&#13;
+io.restassured.internal.ValidatableResponseImpl.body(ValidatableResponseImpl.groovy:298)&#13;
+io.restassured.internal.ValidatableResponseImpl.body(ValidatableResponseImpl.groovy)&#13;
+b22.spartan.editor.SpartanEditorPostTest.lambda$postSpartanWithCSV$14(SpartanEditorPostTest.java:153)&#13;
+net.serenitybdd.rest.Ensure.performCheck(Ensure.java:35)&#13;
+net.serenitybdd.rest.Ensure.that(Ensure.java:23)&#13;
+b22.spartan.editor.SpartanEditorPostTest.postSpartanWithCSV(SpartanEditorPostTest.java:152)&#13;
+</system-err></testcase><testcase classname="b22.spartan.editor.SpartanEditorPostTest" name="New Spartan 9 - name"/><testcase classname="b22.spartan.editor.SpartanEditorPostTest" name="New Spartan 10 - name"/></testsuite>

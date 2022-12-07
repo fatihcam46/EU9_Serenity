@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: b22.spartan.editor.SpartanEditorPostTest
+-------------------------------------------------------------------------------
+Tests run: 14, Failures: 0, Errors: 0, Skipped: 3, Time elapsed: 37.679 s - in b22.spartan.editor.SpartanEditorPostTest

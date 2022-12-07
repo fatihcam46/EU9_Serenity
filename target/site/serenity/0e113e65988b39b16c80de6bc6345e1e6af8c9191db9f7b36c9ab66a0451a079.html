@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Stories</title>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<!--[if IE 7]>
+<!--<link rel="stylesheet" href="font-awesome/css/font-awesome-ie7.min.css">-->
+
+<link rel="stylesheet" type="text/css" href="fontawesome-free-5.7.2-web/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="fontawesome-free-5.7.2-web/css/v4-shims.min.css">
+
+<!-- JQuery -->
+<script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script><link rel="stylesheet" type="text/css" href="chartist/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.css">
+<link rel="stylesheet" type="text/css" href="chartist/dist/chartist.min.css">
+<script src="chartist/dist/chartist.min.js"></script>
+<script src="chartist/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.js"></script>
+<!-- Required Stylesheets -->
+<link href="bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
+
+<!-- Required Javascript -->
+<script src="bootstrap-treeview/dist/bootstrap-treeview.min.js"></script><!-- DataTables -->
+<link type="text/css" href="datatables/1.10.20/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/1.10.20/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/1.10.20/time-elapsed-dhms.js"></script>
+
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="datatables/1.10.20/datatables.bootstrap4.min.js"></script>
+<link type="text/css" href="datatables/1.10.20/datatables.bootstrap4.min.css" rel="stylesheet" />
+
+<script>
+    jQuery.fn.dataTable.ext.type.order['time-elapsed-dhms-pre'] = function(data) {
+
+        var matches = data.match(/^(\d+(?:\.\d+)?)\s*([a-z]+)/i);
+        var multipliers = {
+            ms: 1,
+            s: 1000,
+            m: 60000,
+            h: 3600000,
+            d: 86400000
+        };
+
+        if (matches) {
+            var multiplier = multipliers[matches[2].toLowerCase()];
+            return parseFloat(matches[1]) * multiplier;
+        } else {
+            return -1;
+        };
+    };
+</script>
+<link rel="stylesheet" href="css/core.css"/>
+<link rel="stylesheet" href="css/link.css"/>
+<link type="text/css" media="screen" href="css/screen.css" rel="Stylesheet"/><!-- JQuery-UI -->
+<link type="text/css" href="jqueryui/1.11.2-start/jquery-ui.min.css" rel="Stylesheet" />
+<script type="text/javascript" src="jqueryui/1.11.2-start/jquery-ui.min.js"></script><!-- DataTables -->
+<link type="text/css" href="datatables/1.10.20/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/1.10.20/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/1.10.20/time-elapsed-dhms.js"></script>
+
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="datatables/1.10.20/datatables.bootstrap4.min.js"></script>
+<link type="text/css" href="datatables/1.10.20/datatables.bootstrap4.min.css" rel="stylesheet" />
+
+<script>
+    jQuery.fn.dataTable.ext.type.order['time-elapsed-dhms-pre'] = function(data) {
+
+        var matches = data.match(/^(\d+(?:\.\d+)?)\s*([a-z]+)/i);
+        var multipliers = {
+            ms: 1,
+            s: 1000,
+            m: 60000,
+            h: 3600000,
+            d: 86400000
+        };
+
+        if (matches) {
+            var multiplier = multipliers[matches[2].toLowerCase()];
+            return parseFloat(matches[1]) * multiplier;
+        } else {
+            return -1;
+        };
+    };
+</script>
+
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            var scenarioTable = $('.scenario-result-table').DataTable({
+
+                "order": [],
+                "language": {
+                    searchPlaceholder: "Filter",
+                    search: ""
+                }
+            });
+
+            $('.example-table table').DataTable({
+                searching: false,
+                ordering: false,
+                paging: false,
+                info: false
+            });
+
+            $('.example-table-in-scenario table').DataTable({
+                searching: false,
+                ordering: false,
+                paging: false,
+                info: false
+            });
+
+            $('#evidence-table').DataTable(
+                {
+                    searching: false,
+                    ordering: false,
+                    paging: false,
+                    info: false
+                }
+            );
+
+
+            $(".scenario-docs .card-body table").wrap("<div class='table-responsive'></div>");
+
+            $("#requirements-tabs").tabs();
+            $("#test-tabs").tabs();
+
+            var requirementsTree = [{"text":"Spartan editor post test","type":"story","href":"0e113e65988b39b16c80de6bc6345e1e6af8c9191db9f7b36c9ab66a0451a079.html","nodes":[],"selectable":false,"tags":["\u003ca href\u003d\u0027##beforetable\u0027\u003e\u003ci class\u003d\u0027fa fa-times-circle failure-icon \u0027 title\u003d\u0027FAILURE\u0027\u003e\u003c/i\u003e\u003c/a\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e11 scenarios\u003c/span\u003e"]}];
+
+            $('#tree').treeview({
+                data: requirementsTree,
+                enableLinks: true,
+                showTags: true,
+                expandIcon: "glyphicon glyphicon-folder-close",
+                collapseIcon: "glyphicon glyphicon-folder-open",
+                emptyIcon: "glyphicon glyphicon-book"
+            });
+
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $(".scenario-docs > div > p").html(function () {
+                var text = $(this).text().trim().split(" ");
+                var first = text.shift();
+                return (text.length > 0 ? "<strong>" + first + "</strong> " : first) + text.join(" ");
+            });
+        });
+    </script>
+</head>
+
+<body class="results-page">
+<div id="topheader">
+    <div id="topbanner">
+        <div id="logo"><a href="index.html"><img src="images/serenity-logo.png" border="0"/></a></div>
+        <div id="projectname-banner" style="float:right">
+            <span class="projectname">
+                <span class="projecttitle">B22 API Report</span>
+                <span class="projectsubtitle"></span>
+            </span>
+        </div>
+    </div>
+</div>
+
+
+<div class="middlecontent">
+    <div id="contenttop">
+        <div class="middlebg">
+            <span class="breadcrumbs">
+            <a href='index.html'>Home</a> > <a href="capabilities.html">Requirements</a>
+
+                > <a href="9eb454843ebbee1b53df5761ed4aebe74d6aae434ead5020c5f3b8a4503fb595.html">Spartan</a>
+                > <a href="dac920188175d823e9a5b0eac533fbe97267e1c8f645486caf9880a21f58c5b7.html">Editor</a>
+
+
+                    > <span class="truncate-40">Spartan Editor Post Test</span>
+
+            </span>
+        </div>
+        <div class="rightbg"></div>
+    </div>
+    <div class="clr"></div>
+
+    <!--/* starts second table*/-->
+
+<div>
+    <ul class="nav nav-tabs" role="tablist">
+        <li >
+            <a href="index.html"><i class="fa fa-check-square-o"></i> Overall Test Results</a>
+        </li>
+        <li >
+            <a href="capabilities.html"><i class="fa fa-book"></i> Requirements</a>
+        </li>
+        <li >
+            <a href="7ea0a5e2d679b9deeda9910ae4a9bcd3a281e0d908303a9e16e486103e98880c.html"><i class="fa fa-comments-o"></i> Capabilities</a>
+        </li>
+        <li >
+            <a href="576946480b52ad056d6f5bddf874399c83582ecf90963cc074a14c70580e7d9f.html"><i class="fa fa-comments-o"></i> Features</a>
+        </li>
+        <li class="active">
+            <a href="#"><i class="fa fa-comments-o"></i> Stories</a>
+        </li>
+    </ul>
+    <span class="date-and-time"><a href="build-info.html"><i class="fa fa-info-circle"></i></a> Report generated 07-12-2022 18:06</span>
+    <br style="clear:left"/>
+</div>
+
+    <div class="clr"></div>
+
+    <div id="beforetable"></div>
+    <div id="results-dashboard">
+        <div class="table">
+            <div class=row">
+                <div class="col-sm-12">
+                    <div>
+                        <div clas="table">
+                            <div class="row">
+                                    <div class="col-sm-12">
+                                        <span>
+                                            <h2><i class="fa fa-book"></i> Story:  Spartan Editor Post Test</h2>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="requirementNarrativeTitle">
+                                
+                            </div>
+
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <!-- Requirements result tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a data-toggle="tab" href="#specs"><i class="fas fa-comments"></i> Specifications</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#results"><i class="fas fa-tachometer-alt"></i> Test Results</a>
+                            </li>
+                        </ul>
+
+                        <!-- Specifications and Results tabs -->
+                        <div class="card border">
+                            <div class="tab-content" id="pills-tabContent">
+                                <div id="specs" class="tab-pane fade in active">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+
+                                                    <!--- TOC --->
+                                                    <div id="toc">
+                                                        <h3>Overview</h3>
+                                                        <table class="table" id="toc-table">
+                                                                        <tr>
+                                                                            <td style="width:95%;" class="toc-title">
+                                                                                <span class="orphan-scenario-toc-entry">
+                                                                                    <a href="#ca42709033f4812eefd6210e912bbb81cd5b3e61c523df0dafdc2d64a91df854" title="View scenario details">
+                                                                                        <i class="far fa-comment-dots"></i> Acceptance Test: Editor should be able to POST
+                                                                                    </a>
+                                                                                </span>
+                                                                            </td>
+                                                                            <td style="width:5%;">
+                                                                                <table>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                               href="1ae27ecc6d5230cd8c9612ee4890c5fcf87bbfc312b616f8f15dd95e88447bbb.html"
+                                                                                               title="View test results">
+                                                                                                <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a>
+                                                                                                </a>
+
+
+                                                                                        </td>
+                                                                                            <td>
+                                                                                                <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                                   href="1ae27ecc6d5230cd8c9612ee4890c5fcf87bbfc312b616f8f15dd95e88447bbb.html"
+                                                                                                   title="View test results">
+                                                                                                    <i class="fas fa-search-plus"></i>
+                                                                                                </a>
+                                                                                            </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td style="width:95%;" class="toc-title">
+                                                                                <span class="orphan-scenario-toc-entry">
+                                                                                    <a href="#091f0cc3f642f0c32b7064e689fe10f683363c06b4248256bc8234016c5bc782" title="View scenario details">
+                                                                                        <i class="far fa-comment-dots"></i> Acceptance Test: New Spartan 1 - name: Hersch
+                                                                                    </a>
+                                                                                </span>
+                                                                            </td>
+                                                                            <td style="width:5%;">
+                                                                                <table>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                               href="393fe944061440174191d753ee1c392d7f16d992ef113ee003f1dd45b5a5b5d4.html"
+                                                                                               title="View test results">
+                                                                                                <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a>
+                                                                                                </a>
+
+
+                                                                                        </td>
+                                                                                            <td>
+                                                                                                <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                                   href="393fe944061440174191d753ee1c392d7f16d992ef113ee003f1dd45b5a5b5d4.html"
+                                                                                                   title="View test results">
+                                                                                                    <i class="fas fa-search-plus"></i>
+                                                                                                </a>
+                                                                                            </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td style="width:95%;" class="toc-title">
+                                                                                <span class="orphan-scenario-toc-entry">
+                                                                                    <a href="#7910ec72d39dddaa9106fcc32ec0570f605a6b167fe69487c0b9ccd817ba1b3f" title="View scenario details">
+                                                                                        <i class="far fa-comment-dots"></i> Acceptance Test: New Spartan 2 - name: Millisent
+                                                                                    </a>
+                                                                                </span>
+                                                                            </td>
+                                                                            <td style="width:5%;">
+                                                                                <table>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                               href="807adbb70ef7d9785eea3f19ec6078fa1708dd499d11bdfb05e43e6e82d4e95a.html"
+                                                                                               title="View test results">
+                                                                                                <a href='##beforetable'><i class='fa fa-times-circle failure-icon ' title='FAILURE'></i></a>
+                                                                                                </a>
+
+
+                                                                                        </td>
+                                                                                            <td>
+                                                                                                <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                                   href="807adbb70ef7d9785eea3f19ec6078fa1708dd499d11bdfb05e43e6e82d4e95a.html"
+                                                                                                   title="View test results">
+                                                                                                    <i class="fas fa-search-plus"></i>
+                                                                                                </a>
+                                                                                            </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td style="width:95%;" class="toc-title">
+                                                                                <span class="orphan-scenario-toc-entry">
+                                                                                    <a href="#5ce05b91b479faa32f2cc72fcd61c0082a7780b93e5bc5c87893398caf18560d" title="View scenario details">
+                                                                                        <i class="far fa-comment-dots"></i> Acceptance Test: New Spartan 3 - name: Hewett
+                                                                                    </a>
+                                                                                </span>
+                                                                            </td>
+                                                                            <td style="width:5%;">
+                                                                                <table>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                               href="7e6a572756d8db7818d9e471ea0746744b557e5c8d9f3ce6f3a360500c029ebe.html"
+                                                                                               title="View test results">
+                                                                                                <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a>
+                                                                                                </a>
+
+
+                                                                                        </td>
+                                                                                            <td>
+                                                                                                <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                                   href="7e6a572756d8db7818d9e471ea0746744b557e5c8d9f3ce6f3a360500c029ebe.html"
+                                                                                                   title="View test results">
+                                                                                                    <i class="fas fa-search-plus"></i>
+                                                                                                </a>
+                                                                                            </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td style="width:95%;" class="toc-title">
+                                                                                <span class="orphan-scenario-toc-entry">
+                                                                                    <a href="#a64bc427decedabb248f8e0ea895f364da0a04ecc23f9c62c0a496ed258240ce" title="View scenario details">
+                                                                                        <i class="far fa-comment-dots"></i> Acceptance Test: New Spartan 4 - name: Brandy
+                                                                                    </a>
+                                                                                </span>
+                                                                            </td>
+                                                                            <td style="width:5%;">
+                                                                                <table>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                               href="5ce6340302e99aad42825ea0c3b69899d2a914ec9022d2e32a4e91fe9293d25c.html"
+                                                                                               title="View test results">
+                                                                                                <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a>
+                                                                                                </a>
+
+
+                                                                                        </td>
+                                                                                            <td>
+                                                                                                <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                                   href="5ce6340302e99aad42825ea0c3b69899d2a914ec9022d2e32a4e91fe9293d25c.html"
+                                                                                                   title="View test results">
+                                                                                                    <i class="fas fa-search-plus"></i>
+                                                                                                </a>
+                                                                                            </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td style="width:95%;" class="toc-title">
+                                                                                <span class="orphan-scenario-toc-entry">
+                                                                                    <a href="#47813fb64b8f7674204e24cfd97229be9962180e8aa3713209aa10141b280777" title="View scenario details">
+                                                                                        <i class="far fa-comment-dots"></i> Acceptance Test: New Spartan 5 - name: Kiley
+                                                                                    </a>
+                                                                                </span>
+                                                                            </td>
+                                                                            <td style="width:5%;">
+                                                                                <table>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                               href="877b9298552fe3392147083487b72488c752d9e8e9d34a53e249c666a353aa9e.html"
+                                                                                               title="View test results">
+                                                                                                <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a>
+                                                                                                </a>
+
+
+                                                                                        </td>
+                                                                                            <td>
+                                                                                                <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                                   href="877b9298552fe3392147083487b72488c752d9e8e9d34a53e249c666a353aa9e.html"
+                                                                                                   title="View test results">
+                                                                                                    <i class="fas fa-search-plus"></i>
+                                                                                                </a>
+                                                                                            </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td style="width:95%;" class="toc-title">
+                                                                                <span class="orphan-scenario-toc-entry">
+                                                                                    <a href="#ad977ca595144248b4eba9b4239284a9262acec19a2cb2716296febe83e63bb3" title="View scenario details">
+                                                                                        <i class="far fa-comment-dots"></i> Acceptance Test: New Spartan 6 - name: Channa
+                                                                                    </a>
+                                                                                </span>
+                                                                            </td>
+                                                                            <td style="width:5%;">
+                                                                                <table>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                               href="9073b071ab4cb190234d27063b90635bd61a27c8cb0e470ae74d4fc8df99694e.html"
+                                                                                               title="View test results">
+                                                                                                <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a>
+                                                                                                </a>
+
+
+                                                                                        </td>
+                                                                                            <td>
+                                                                                                <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                                   href="9073b071ab4cb190234d27063b90635bd61a27c8cb0e470ae74d4fc8df99694e.html"
+                                                                                                   title="View test results">
+                                                                                                    <i class="fas fa-search-plus"></i>
+                                                                                                </a>
+                                                                                            </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td style="width:95%;" class="toc-title">
+                                                                                <span class="orphan-scenario-toc-entry">
+                                                                                    <a href="#a1ec2fb169542c91be69c0bf036f91dcd1ffd36d880e1436f89738e93d233669" title="View scenario details">
+                                                                                        <i class="far fa-comment-dots"></i> Acceptance Test: New Spartan 7 - name: Sidnee
+                                                                                    </a>
+                                                                                </span>
+                                                                            </td>
+                                                                            <td style="width:5%;">
+                                                                                <table>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                               href="b4b8cad7b937b5f72ace4492a7c40968eed593b15258924a00301b74edefe3d0.html"
+                                                                                               title="View test results">
+                                                                                                <a href='##beforetable'><i class='fa fa-times-circle failure-icon ' title='FAILURE'></i></a>
+                                                                                                </a>
+
+
+                                                                                        </td>
+                                                                                            <td>
+                                                                                                <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                                   href="b4b8cad7b937b5f72ace4492a7c40968eed593b15258924a00301b74edefe3d0.html"
+                                                                                                   title="View test results">
+                                                                                                    <i class="fas fa-search-plus"></i>
+                                                                                                </a>
+                                                                                            </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td style="width:95%;" class="toc-title">
+                                                                                <span class="orphan-scenario-toc-entry">
+                                                                                    <a href="#c915cdd21622cf2a53d3b4b887df794a2c623526468e5802b47869d476c1c768" title="View scenario details">
+                                                                                        <i class="far fa-comment-dots"></i> Acceptance Test: New Spartan 8 - name: Cacilia
+                                                                                    </a>
+                                                                                </span>
+                                                                            </td>
+                                                                            <td style="width:5%;">
+                                                                                <table>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                               href="18911dad92274cd036e4fa5ad814c1132d6a941f3e549079b3444a7725d4eb02.html"
+                                                                                               title="View test results">
+                                                                                                <a href='##beforetable'><i class='fa fa-times-circle failure-icon ' title='FAILURE'></i></a>
+                                                                                                </a>
+
+
+                                                                                        </td>
+                                                                                            <td>
+                                                                                                <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                                   href="18911dad92274cd036e4fa5ad814c1132d6a941f3e549079b3444a7725d4eb02.html"
+                                                                                                   title="View test results">
+                                                                                                    <i class="fas fa-search-plus"></i>
+                                                                                                </a>
+                                                                                            </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td style="width:95%;" class="toc-title">
+                                                                                <span class="orphan-scenario-toc-entry">
+                                                                                    <a href="#133f517b3d39a30b9864bf060e88019dfe537cdcd616b1a58ae075a722177fff" title="View scenario details">
+                                                                                        <i class="far fa-comment-dots"></i> Acceptance Test: New Spartan 9 - name: Brit
+                                                                                    </a>
+                                                                                </span>
+                                                                            </td>
+                                                                            <td style="width:5%;">
+                                                                                <table>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                               href="2ab52fc599baf5df9855669fee8d2f8e026a4f5064ba78bca69ecea0ce596317.html"
+                                                                                               title="View test results">
+                                                                                                <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a>
+                                                                                                </a>
+
+
+                                                                                        </td>
+                                                                                            <td>
+                                                                                                <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                                   href="2ab52fc599baf5df9855669fee8d2f8e026a4f5064ba78bca69ecea0ce596317.html"
+                                                                                                   title="View test results">
+                                                                                                    <i class="fas fa-search-plus"></i>
+                                                                                                </a>
+                                                                                            </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td style="width:95%;" class="toc-title">
+                                                                                <span class="orphan-scenario-toc-entry">
+                                                                                    <a href="#3c54a9e28fcda4c05a977a27206734f2eeb7771f3d4e96782b36ce289d27de32" title="View scenario details">
+                                                                                        <i class="far fa-comment-dots"></i> Acceptance Test: New Spartan 10 - name: Dita
+                                                                                    </a>
+                                                                                </span>
+                                                                            </td>
+                                                                            <td style="width:5%;">
+                                                                                <table>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                               href="07aea2f647503447662463a38bf2518a070d11eb7e424d4ca855a40a153e7d04.html"
+                                                                                               title="View test results">
+                                                                                                <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a>
+                                                                                                </a>
+
+
+                                                                                        </td>
+                                                                                            <td>
+                                                                                                <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                                                   href="07aea2f647503447662463a38bf2518a070d11eb7e424d4ca855a40a153e7d04.html"
+                                                                                                   title="View test results">
+                                                                                                    <i class="fas fa-search-plus"></i>
+                                                                                                </a>
+                                                                                            </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                        </table>
+                                                    </div>
+                                                    <!--- END OF TOC --->
+
+                                                    <h3>Scenarios</h3>
+
+                                                        <a name="d89f4e5b-4b55-4a9b-b2aa-12e244d8039e" ></a>
+
+
+                                                            <div class="scenario-docs card" id="ca42709033f4812eefd6210e912bbb81cd5b3e61c523df0dafdc2d64a91df854">
+                                                                <div class="scenario-docs card-header success"
+                                                                     style="min-height:1.5em;">
+                                                                    <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="1ae27ecc6d5230cd8c9612ee4890c5fcf87bbfc312b616f8f15dd95e88447bbb.html"
+                                                                   title="View test results">Acceptance Test: Editor should be able to POST</a>
+                                                            </span>
+                                                                        <span class="scenario-result-icon">
+                                                                
+
+                                                                                <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a>
+                                                            </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="scenario-docs card-body">
+                                                                        <p>POST http://3.87.65.105:7000/api/spartans</p>
+                                                                        <p>Ensure that Status code is 201</p>
+                                                                        <p>Ensure that Content type is JSON</p>
+                                                                        <p>Ensure that success message is correct</p>
+                                                                        <p>Ensure that id is not null</p>
+                                                                        <p>Ensure that name is correct</p>
+                                                                        <p>Ensure that gender is correct</p>
+                                                                        <p>Ensure that phone is correct</p>
+                                                                        <p>Ensure that check location header ends with newly generated id</p>
+                                                                    <div class="examples">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="scenario-docs card" id="091f0cc3f642f0c32b7064e689fe10f683363c06b4248256bc8234016c5bc782">
+                                                                <div class="scenario-docs card-header success"
+                                                                     style="min-height:1.5em;">
+                                                                    <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="393fe944061440174191d753ee1c392d7f16d992ef113ee003f1dd45b5a5b5d4.html"
+                                                                   title="View test results">Acceptance Test: New Spartan 1 - name</a>
+                                                            </span>
+                                                                        <span class="scenario-result-icon">
+                                                                
+
+                                                                                <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a>
+                                                            </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="scenario-docs card-body">
+                                                                        <p>POST http://3.87.65.105:7000/api/spartans</p>
+                                                                        <p>Ensure that Status code is 201</p>
+                                                                        <p>Ensure that Content type is JSON</p>
+                                                                        <p>Ensure that success message is correct</p>
+                                                                        <p>Ensure that id is not null</p>
+                                                                        <p>Ensure that name is correct</p>
+                                                                        <p>Ensure that gender is correct</p>
+                                                                        <p>Ensure that phone is correct</p>
+                                                                        <p>Ensure that check location header ends with newly generated id</p>
+                                                                    <div class="examples">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="scenario-docs card" id="7910ec72d39dddaa9106fcc32ec0570f605a6b167fe69487c0b9ccd817ba1b3f">
+                                                                <div class="scenario-docs card-header failure"
+                                                                     style="min-height:1.5em;">
+                                                                    <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="807adbb70ef7d9785eea3f19ec6078fa1708dd499d11bdfb05e43e6e82d4e95a.html"
+                                                                   title="View test results">Acceptance Test: New Spartan 2 - name</a>
+                                                            </span>
+                                                                        <span class="scenario-result-icon">
+                                                                
+
+                                                                                <a href='##beforetable'><i class='fa fa-times-circle failure-icon ' title='FAILURE'></i></a>
+                                                            </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="scenario-docs card-body">
+                                                                        <p>POST http://3.87.65.105:7000/api/spartans</p>
+                                                                        <p>Ensure that Status code is 201</p>
+                                                                        <p>Ensure that Content type is JSON</p>
+                                                                        <p>Ensure that success message is correct</p>
+                                                                        <p>Ensure that id is not null</p>
+                                                                        <p>Ensure that name is correct</p>
+                                                                        <p>Ensure that gender is correct</p>
+                                                                        <p>Ensure that phone is correct</p>
+                                                                        <p>Ensure that check location header ends with newly generated id</p>
+                                                                    <div class="examples">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="scenario-docs card" id="5ce05b91b479faa32f2cc72fcd61c0082a7780b93e5bc5c87893398caf18560d">
+                                                                <div class="scenario-docs card-header success"
+                                                                     style="min-height:1.5em;">
+                                                                    <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="7e6a572756d8db7818d9e471ea0746744b557e5c8d9f3ce6f3a360500c029ebe.html"
+                                                                   title="View test results">Acceptance Test: New Spartan 3 - name</a>
+                                                            </span>
+                                                                        <span class="scenario-result-icon">
+                                                                
+
+                                                                                <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a>
+                                                            </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="scenario-docs card-body">
+                                                                        <p>POST http://3.87.65.105:7000/api/spartans</p>
+                                                                        <p>Ensure that Status code is 201</p>
+                                                                        <p>Ensure that Content type is JSON</p>
+                                                                        <p>Ensure that success message is correct</p>
+                                                                        <p>Ensure that id is not null</p>
+                                                                        <p>Ensure that name is correct</p>
+                                                                        <p>Ensure that gender is correct</p>
+                                                                        <p>Ensure that phone is correct</p>
+                                                                        <p>Ensure that check location header ends with newly generated id</p>
+                                                                    <div class="examples">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="scenario-docs card" id="a64bc427decedabb248f8e0ea895f364da0a04ecc23f9c62c0a496ed258240ce">
+                                                                <div class="scenario-docs card-header success"
+                                                                     style="min-height:1.5em;">
+                                                                    <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="5ce6340302e99aad42825ea0c3b69899d2a914ec9022d2e32a4e91fe9293d25c.html"
+                                                                   title="View test results">Acceptance Test: New Spartan 4 - name</a>
+                                                            </span>
+                                                                        <span class="scenario-result-icon">
+                                                                
+
+                                                                                <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a>
+                                                            </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="scenario-docs card-body">
+                                                                        <p>POST http://3.87.65.105:7000/api/spartans</p>
+                                                                        <p>Ensure that Status code is 201</p>
+                                                                        <p>Ensure that Content type is JSON</p>
+                                                                        <p>Ensure that success message is correct</p>
+                                                                        <p>Ensure that id is not null</p>
+                                                                        <p>Ensure that name is correct</p>
+                                                                        <p>Ensure that gender is correct</p>
+                                                                        <p>Ensure that phone is correct</p>
+                                                                        <p>Ensure that check location header ends with newly generated id</p>
+                                                                    <div class="examples">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="scenario-docs card" id="47813fb64b8f7674204e24cfd97229be9962180e8aa3713209aa10141b280777">
+                                                                <div class="scenario-docs card-header success"
+                                                                     style="min-height:1.5em;">
+                                                                    <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="877b9298552fe3392147083487b72488c752d9e8e9d34a53e249c666a353aa9e.html"
+                                                                   title="View test results">Acceptance Test: New Spartan 5 - name</a>
+                                                            </span>
+                                                                        <span class="scenario-result-icon">
+                                                                
+
+                                                                                <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a>
+                                                            </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="scenario-docs card-body">
+                                                                        <p>POST http://3.87.65.105:7000/api/spartans</p>
+                                                                        <p>Ensure that Status code is 201</p>
+                                                                        <p>Ensure that Content type is JSON</p>
+                                                                        <p>Ensure that success message is correct</p>
+                                                                        <p>Ensure that id is not null</p>
+                                                                        <p>Ensure that name is correct</p>
+                                                                        <p>Ensure that gender is correct</p>
+                                                                        <p>Ensure that phone is correct</p>
+                                                                        <p>Ensure that check location header ends with newly generated id</p>
+                                                                    <div class="examples">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="scenario-docs card" id="ad977ca595144248b4eba9b4239284a9262acec19a2cb2716296febe83e63bb3">
+                                                                <div class="scenario-docs card-header success"
+                                                                     style="min-height:1.5em;">
+                                                                    <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="9073b071ab4cb190234d27063b90635bd61a27c8cb0e470ae74d4fc8df99694e.html"
+                                                                   title="View test results">Acceptance Test: New Spartan 6 - name</a>
+                                                            </span>
+                                                                        <span class="scenario-result-icon">
+                                                                
+
+                                                                                <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a>
+                                                            </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="scenario-docs card-body">
+                                                                        <p>POST http://3.87.65.105:7000/api/spartans</p>
+                                                                        <p>Ensure that Status code is 201</p>
+                                                                        <p>Ensure that Content type is JSON</p>
+                                                                        <p>Ensure that success message is correct</p>
+                                                                        <p>Ensure that id is not null</p>
+                                                                        <p>Ensure that name is correct</p>
+                                                                        <p>Ensure that gender is correct</p>
+                                                                        <p>Ensure that phone is correct</p>
+                                                                        <p>Ensure that check location header ends with newly generated id</p>
+                                                                    <div class="examples">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="scenario-docs card" id="a1ec2fb169542c91be69c0bf036f91dcd1ffd36d880e1436f89738e93d233669">
+                                                                <div class="scenario-docs card-header failure"
+                                                                     style="min-height:1.5em;">
+                                                                    <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="b4b8cad7b937b5f72ace4492a7c40968eed593b15258924a00301b74edefe3d0.html"
+                                                                   title="View test results">Acceptance Test: New Spartan 7 - name</a>
+                                                            </span>
+                                                                        <span class="scenario-result-icon">
+                                                                
+
+                                                                                <a href='##beforetable'><i class='fa fa-times-circle failure-icon ' title='FAILURE'></i></a>
+                                                            </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="scenario-docs card-body">
+                                                                        <p>POST http://3.87.65.105:7000/api/spartans</p>
+                                                                        <p>Ensure that Status code is 201</p>
+                                                                        <p>Ensure that Content type is JSON</p>
+                                                                        <p>Ensure that success message is correct</p>
+                                                                        <p>Ensure that id is not null</p>
+                                                                        <p>Ensure that name is correct</p>
+                                                                        <p>Ensure that gender is correct</p>
+                                                                        <p>Ensure that phone is correct</p>
+                                                                        <p>Ensure that check location header ends with newly generated id</p>
+                                                                    <div class="examples">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="scenario-docs card" id="c915cdd21622cf2a53d3b4b887df794a2c623526468e5802b47869d476c1c768">
+                                                                <div class="scenario-docs card-header failure"
+                                                                     style="min-height:1.5em;">
+                                                                    <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="18911dad92274cd036e4fa5ad814c1132d6a941f3e549079b3444a7725d4eb02.html"
+                                                                   title="View test results">Acceptance Test: New Spartan 8 - name</a>
+                                                            </span>
+                                                                        <span class="scenario-result-icon">
+                                                                
+
+                                                                                <a href='##beforetable'><i class='fa fa-times-circle failure-icon ' title='FAILURE'></i></a>
+                                                            </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="scenario-docs card-body">
+                                                                        <p>POST http://3.87.65.105:7000/api/spartans</p>
+                                                                        <p>Ensure that Status code is 201</p>
+                                                                        <p>Ensure that Content type is JSON</p>
+                                                                        <p>Ensure that success message is correct</p>
+                                                                        <p>Ensure that id is not null</p>
+                                                                        <p>Ensure that name is correct</p>
+                                                                        <p>Ensure that gender is correct</p>
+                                                                        <p>Ensure that phone is correct</p>
+                                                                        <p>Ensure that check location header ends with newly generated id</p>
+                                                                    <div class="examples">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="scenario-docs card" id="133f517b3d39a30b9864bf060e88019dfe537cdcd616b1a58ae075a722177fff">
+                                                                <div class="scenario-docs card-header success"
+                                                                     style="min-height:1.5em;">
+                                                                    <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="2ab52fc599baf5df9855669fee8d2f8e026a4f5064ba78bca69ecea0ce596317.html"
+                                                                   title="View test results">Acceptance Test: New Spartan 9 - name</a>
+                                                            </span>
+                                                                        <span class="scenario-result-icon">
+                                                                
+
+                                                                                <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a>
+                                                            </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="scenario-docs card-body">
+                                                                        <p>POST http://3.87.65.105:7000/api/spartans</p>
+                                                                        <p>Ensure that Status code is 201</p>
+                                                                        <p>Ensure that Content type is JSON</p>
+                                                                        <p>Ensure that success message is correct</p>
+                                                                        <p>Ensure that id is not null</p>
+                                                                        <p>Ensure that name is correct</p>
+                                                                        <p>Ensure that gender is correct</p>
+                                                                        <p>Ensure that phone is correct</p>
+                                                                        <p>Ensure that check location header ends with newly generated id</p>
+                                                                    <div class="examples">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="scenario-docs card" id="3c54a9e28fcda4c05a977a27206734f2eeb7771f3d4e96782b36ce289d27de32">
+                                                                <div class="scenario-docs card-header success"
+                                                                     style="min-height:1.5em;">
+                                                                    <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="07aea2f647503447662463a38bf2518a070d11eb7e424d4ca855a40a153e7d04.html"
+                                                                   title="View test results">Acceptance Test: New Spartan 10 - name</a>
+                                                            </span>
+                                                                        <span class="scenario-result-icon">
+                                                                
+
+                                                                                <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a>
+                                                            </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="scenario-docs card-body">
+                                                                        <p>POST http://3.87.65.105:7000/api/spartans</p>
+                                                                        <p>Ensure that Status code is 201</p>
+                                                                        <p>Ensure that Content type is JSON</p>
+                                                                        <p>Ensure that success message is correct</p>
+                                                                        <p>Ensure that id is not null</p>
+                                                                        <p>Ensure that name is correct</p>
+                                                                        <p>Ensure that gender is correct</p>
+                                                                        <p>Ensure that phone is correct</p>
+                                                                        <p>Ensure that check location header ends with newly generated id</p>
+                                                                    <div class="examples">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="results" class="tab-pane fade">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+
+                                                <div style="width:300px;" class="chart-container automated-and-manual-results">
+                                                    <div class="ct-chart ct-square"></div>
+                                                </div>
+                                                <script>
+
+                                                    var labels = ['73%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '27%', ' ', ' ', ' ', ' ', ' '];
+                                                    // Our series array that contains series objects or in this case series data arrays
+
+                                                    var series = [{meta: 'Passing tests (automated)', value: 8}, {meta: 'Passing tests (manual)', value: 0}, {meta: 'Pending tests (automated)', value: 0}, {meta: 'Pending tests (manual)', value: 0}, {meta: 'Ignored tests (automated)', value: 0}, {meta: 'Ignored tests (manual)', value: 0}, {meta: 'Skipped tests (automated)', value: 0}, {meta: 'Skipped tests (manual)', value: 0}, {meta: 'Failing tests (automated)', value: 3}, {meta: 'Failing tests (manual)', value: 0}, {meta: 'Broken tests (automated)', value: 0}, {meta: 'Broken tests (manual)', value: 0}, {meta: 'Compromised tests (automated)', value: 0}, {meta: 'Compromised tests (manual)', value: 0}];
+
+                                                    // As options we currently only set a static size of 300x200 px. We can also omit this and use aspect ratio containers
+                                                    // as you saw in the previous example
+                                                    var options = {
+                                                        width: 350,
+                                                        height: 300
+                                                    };
+
+                                                    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                                                        new Chartist.Pie('.ct-chart', {
+                                                            series: series,
+                                                            labels: labels,
+                                                        }, {
+                                                            donut: true,
+                                                            donutWidth: 60,
+                                                            donutSolid: true,
+                                                            startAngle: 270,
+                                                            showLabel: true
+                                                        }, options);
+                                                    });
+
+                                                </script>
+                                            </div>
+                                            <div class="col-sm-8">
+
+                                                    <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col">Scenario Results (including rows of test
+                                                                data)
+                                                            </th>
+                                                            <th scope="col" colspan="2" class="automated-stats">
+                                                                Automated
+                                                            </th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                                <td class="aggregate-result-count">
+                                                                    <a href="5b1a53a946fb45b95acc90d83e43ad3d112e6d56d819db01f57877276f6e2c1f.html"><i
+                                                                                class='fa fa-check-circle-o success-icon'></i>&nbsp;Passing</a>
+                                                                </td>
+                                                            <td class="automated-stats">8</td>
+                                                            <td class="automated-stats">73%</td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td class="aggregate-result-count"><i
+                                                                            class='fa fa-stop-circle-o pending-icon'></i>&nbsp;Pending
+                                                                </td>
+                                                            <td class="automated-stats">0</td>
+                                                            <td class="automated-stats"> </td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td class="aggregate-result-count"><i
+                                                                            class='fa fa-ban ignored-icon'></i>&nbsp;Ignored
+                                                                </td>
+                                                            <td class="automated-stats">0</td>
+                                                            <td class="automated-stats"> </td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td class="aggregate-result-count"><i
+                                                                            class='fa fa-fast-forward skip-icon'></i>&nbsp;Skipped
+                                                                </td>
+                                                            <td class="automated-stats">0</td>
+                                                            <td class="automated-stats"> </td>
+                                                        </tr>
+                                                        <tr>
+                                                                    <td colspan="3"><a href="a5cbb444b261730c22e771726dc23ec1429e8d5e06d11d1f09dd9cb31d747ecf.html"><i
+                                                                                    class='fa fa-times failure-icon'></i>&nbsp;<em>Unsuccessful</em></a>
+                                                                    </td>
+
+                                                        </tr>
+
+                                                        <tr>
+                                                                <td class="aggregate-result-count indented-error-category">
+                                                                    <a href="7beeac604b45bf39ca4d71f2325f28240a7381504ab47a6de0799f14f641f949.html"><i
+                                                                                class='fa fa-times-circle failure-icon'></i>&nbsp;Failed</a>
+                                                                </td>
+                                                            <td class="automated-stats">3</td>
+                                                            <td class="automated-stats">27%</td>
+                                                        <tr>
+                                                                <td class="aggregate-result-count indented-error-category">
+                                                                    <i
+                                                                            class='fa fa-exclamation-triangle error-icon'></i>&nbsp;Broken
+                                                                </td>
+                                                            <td class="automated-stats">0</td>
+                                                            <td class="automated-stats"> </td>
+                                                        <tr>
+                                                                <td class="aggregate-result-count indented-error-category">
+                                                                    <i
+                                                                            class='fa fa-chain-broken compromised-icon'></i>&nbsp;Compromised
+                                                                </td>
+                                                            <td class="automated-stats">0</td>
+                                                            <td class="automated-stats"> </td>
+                                                        </tr>
+                                                        <tr class="summary-stats">
+                                                            <td class="aggregate-result-count">Total</td>
+                                                            <td class="automated-stats">11</td>
+                                                            <td class="automated-stats"></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Execution Time</th>
+                                                            <th>Clock Time</th>
+                                                            <th>Fastest Test</th>
+                                                            <th>Slowest Test</th>
+                                                            <th>Average Execution Time</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>24s</td>
+                                                            <td>24s</td>
+                                                            <td>859ms</td>
+                                                            <td>11s</td>
+                                                            <td>2s</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <h3><i class="fas fa-cogs"></i> Automated Tests</h3>
+
+                                                        <table class="scenario-result-table table"
+                                                               id="scenario-results">
+                                                            <thead>
+                                                            <tr>
+                                                                <th class="test-name-column">Scenario</th>
+                                                                <th>Steps</th>
+                                                                <th>Start Time</th>
+                                                                <th>Duration</th>
+                                                                <th>Result</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr class="scenario-result SUCCESS">
+                                                                    <td>
+                                                                            <a href="1ae27ecc6d5230cd8c9612ee4890c5fcf87bbfc312b616f8f15dd95e88447bbb.html">Editor should be able to POST</a>
+                                                                    </td>
+                                                                    <td>9</td>
+                                                                    <td>18:06:36</td>
+                                                                    <td>11s 856ms</td>
+                                                                    <td>
+                                                                            <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a> <span
+                                                                                style="display:none">SUCCESS</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="scenario-result SUCCESS">
+                                                                    <td>
+                                                                            <a href="393fe944061440174191d753ee1c392d7f16d992ef113ee003f1dd45b5a5b5d4.html">New Spartan 1 - name</a>
+                                                                    </td>
+                                                                    <td>9</td>
+                                                                    <td>18:06:48</td>
+                                                                    <td>3s 874ms</td>
+                                                                    <td>
+                                                                            <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a> <span
+                                                                                style="display:none">SUCCESS</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="scenario-result FAILURE">
+                                                                    <td>
+                                                                            <a href="807adbb70ef7d9785eea3f19ec6078fa1708dd499d11bdfb05e43e6e82d4e95a.html">New Spartan 2 - name</a>
+                                                                    </td>
+                                                                    <td>9</td>
+                                                                    <td>18:06:52</td>
+                                                                    <td>996ms</td>
+                                                                    <td>
+                                                                            <a href='##beforetable'><i class='fa fa-times-circle failure-icon ' title='FAILURE'></i></a> <span
+                                                                                style="display:none">FAILURE</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="scenario-result SUCCESS">
+                                                                    <td>
+                                                                            <a href="7e6a572756d8db7818d9e471ea0746744b557e5c8d9f3ce6f3a360500c029ebe.html">New Spartan 3 - name</a>
+                                                                    </td>
+                                                                    <td>9</td>
+                                                                    <td>18:06:53</td>
+                                                                    <td>924ms</td>
+                                                                    <td>
+                                                                            <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a> <span
+                                                                                style="display:none">SUCCESS</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="scenario-result SUCCESS">
+                                                                    <td>
+                                                                            <a href="5ce6340302e99aad42825ea0c3b69899d2a914ec9022d2e32a4e91fe9293d25c.html">New Spartan 4 - name</a>
+                                                                    </td>
+                                                                    <td>9</td>
+                                                                    <td>18:06:54</td>
+                                                                    <td>992ms</td>
+                                                                    <td>
+                                                                            <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a> <span
+                                                                                style="display:none">SUCCESS</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="scenario-result SUCCESS">
+                                                                    <td>
+                                                                            <a href="877b9298552fe3392147083487b72488c752d9e8e9d34a53e249c666a353aa9e.html">New Spartan 5 - name</a>
+                                                                    </td>
+                                                                    <td>9</td>
+                                                                    <td>18:06:55</td>
+                                                                    <td>948ms</td>
+                                                                    <td>
+                                                                            <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a> <span
+                                                                                style="display:none">SUCCESS</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="scenario-result SUCCESS">
+                                                                    <td>
+                                                                            <a href="9073b071ab4cb190234d27063b90635bd61a27c8cb0e470ae74d4fc8df99694e.html">New Spartan 6 - name</a>
+                                                                    </td>
+                                                                    <td>9</td>
+                                                                    <td>18:06:56</td>
+                                                                    <td>1s 096ms</td>
+                                                                    <td>
+                                                                            <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a> <span
+                                                                                style="display:none">SUCCESS</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="scenario-result FAILURE">
+                                                                    <td>
+                                                                            <a href="b4b8cad7b937b5f72ace4492a7c40968eed593b15258924a00301b74edefe3d0.html">New Spartan 7 - name</a>
+                                                                    </td>
+                                                                    <td>9</td>
+                                                                    <td>18:06:57</td>
+                                                                    <td>1s 087ms</td>
+                                                                    <td>
+                                                                            <a href='##beforetable'><i class='fa fa-times-circle failure-icon ' title='FAILURE'></i></a> <span
+                                                                                style="display:none">FAILURE</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="scenario-result FAILURE">
+                                                                    <td>
+                                                                            <a href="18911dad92274cd036e4fa5ad814c1132d6a941f3e549079b3444a7725d4eb02.html">New Spartan 8 - name</a>
+                                                                    </td>
+                                                                    <td>9</td>
+                                                                    <td>18:06:58</td>
+                                                                    <td>959ms</td>
+                                                                    <td>
+                                                                            <a href='##beforetable'><i class='fa fa-times-circle failure-icon ' title='FAILURE'></i></a> <span
+                                                                                style="display:none">FAILURE</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="scenario-result SUCCESS">
+                                                                    <td>
+                                                                            <a href="2ab52fc599baf5df9855669fee8d2f8e026a4f5064ba78bca69ecea0ce596317.html">New Spartan 9 - name</a>
+                                                                    </td>
+                                                                    <td>9</td>
+                                                                    <td>18:06:59</td>
+                                                                    <td>859ms</td>
+                                                                    <td>
+                                                                            <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a> <span
+                                                                                style="display:none">SUCCESS</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="scenario-result SUCCESS">
+                                                                    <td>
+                                                                            <a href="07aea2f647503447662463a38bf2518a070d11eb7e424d4ca855a40a153e7d04.html">New Spartan 10 - name</a>
+                                                                    </td>
+                                                                    <td>9</td>
+                                                                    <td>18:07:00</td>
+                                                                    <td>1s 017ms</td>
+                                                                    <td>
+                                                                            <a href='##beforetable'><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></a> <span
+                                                                                style="display:none">SUCCESS</span>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <h3><i class="fas fa-edit"></i> Manual Tests</h3>
+
+                                                        No manual tests were recorded
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <span class="version">Serenity BDD version 2.4.4</span>
+                    </div>
+                </div>
+            </div>
+</body>
+</html>
